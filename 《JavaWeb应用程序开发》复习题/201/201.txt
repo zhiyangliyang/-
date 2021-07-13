@@ -1,0 +1,6 @@
+2-1 Cookie操作。
+（1）设计第1个JSP网页(index.jsp)，在其中保存一个Cookie，内容为当前日期时间，至少精确到秒。显示保存Cookie的文本提示信息和到第2个网页(readCookie.jsp)的链接。
+（2）设计第2个JSP网页(readCookie.jsp)，获取上边第1个网页中保存的Cookie，并在页面中显示其内容。
+效果参照附图所示。
+
+

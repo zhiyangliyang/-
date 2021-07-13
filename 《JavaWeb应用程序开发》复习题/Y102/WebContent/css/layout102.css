@@ -1,0 +1,44 @@
+@charset "UTF-8";
+.body{
+	width:800px;
+	margin:0 auto;
+}
+.banner{
+	width:800px;
+	height:180px;
+	/* padding-bottom: 20px; */
+	text-align: center;
+	background-image:url("../static/bgimg.jpg");
+}
+.list_1{
+	display: inline-block;
+	vertical-align: middle;
+}
+.list_2{
+	font-size: 20px;
+	font-family: 宋体;
+}
+.content{
+	width: 800px;
+	height: 400px;
+}
+.content_1{
+	width: 240px;
+	height: 400px;
+	background-color: #9cf;
+	float: left;
+}
+.content_1 ul{
+	list-style-type: none;
+}
+.content_2{
+	width: 600px;
+	height: 400px;
+	float:right;
+}
+.footer{
+	width: 800px;
+	height: 100px;
+	background-color: #9cf;
+	text-align: center;
+}

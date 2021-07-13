@@ -1,0 +1,19 @@
+3-4 数据更新操作。
+MySQL数据库服务器为本地localhost；数据库名为：jsptest，编码为默认的单字节码（ISO 8859-1）；其中有一保存用户信息的数据表：jspuser，表结构与保存的用户信息见附图；MySQL用户可使用数据库的管理帐户root，密码为空；也可创建用户：jspuser1，密码：123456，并赋予相应的权限。MySQL JDBC驱动程序可从FTP下载。要求设计浏览用户信息并具有更新功能的JSP网页，与其它题目的网页一起发布到与数据库服务器在同一台机器的tomcat服务器上。设计时可在本地建相应的数据库，用提供的SQL文件建立数据表进行调试；具体内容与要求如下：
+
+1. 实体JavaBean，文件名为：JspUser.java；包结构为“yzs（你姓名全拼的首字母）.test.jsp”；属性与数据表jspuser中的字段一致，用于保存输入的用户信息。
+
+2. 连接JavaBean，文件名为：DbConnection.java；包结构同上；实现与数据库连接的静态方法，方法名自定，返回Connection类型的对象。
+
+3. 数据访问JavaBean，文件名为：TestUserDao.java；包结构同上；实现三个方法，第1个方法，方法名自定，无参数。该方法调用DbConnection.java的静态方法建立与数据库的连接，然后查询数据库检索testuser表中的所有记录，每条记录的数据封装在一个TestUser Bean中，所有的TestUser Bean对象组成一个List对象，返回List对象。第2个方法，参数为用户ID，整数类型，从testuser表中查询指定ID的用户记录，将记录中的用户信息封装到TestUser Bean中，返回该TestUser Bean对象。第3个方法，参数为TestUser Bean对象，返回整数值，实现该用户信息的更新功能。
+
+4. 用户信息浏览页面，文件名为main.jsp。在页面中引入TestUserDao Bean，调用其第1个方法，获取保存所有用户信息的List对象，循环遍历List对象中所有的元素和每个元素（TestUser对象）中的所有属性，用表格显示出来，每条记录（TestUser中保存的用户信息）为一行，每个字段（TestUser Bean中的每个属性）为一列，每行的最后一列为修改链接，链接到userupdate.jsp页面，传递用户ID参数。
+
+5. 更新页面userupdate.jsp，获取main.jsp传递的用户ID参数，引入TestUserDao Bean，调用其第2个方法，获取保存要更新的用户信息的UserTest对象，在页面中设计一表单，有四个文本框和一个提交按钮，用于输入用户名、电子邮箱、密码与密码确认，用UserTest对象的属性值填充相应的文本框。表单提交给update_act.jsp进行处理。要求网页中有相应的标题，如：“用户信息更新”，文本框前有相应的标签，如：“用户名：”、“电子邮箱：”、“密码：”、“密码确认：”等。
+
+最好加上验证，判断用户名、电子邮箱、密码与密码确认是否为空,如果验证未通过，转回到userupdate.jsp，在表单下方显示提示信息“You must input username, email, password and confirm passord!”或者“用户名、电子邮箱、密码和密码确认都必须输入，不能为空！”；否则，继续判断用户名、电子邮箱、密码与密码格式以及长度是否小于数据库中相应字段的长度，如果验证未通过，转回到userupdate.jsp，在表单下方显示提示信息“You must input username, email, password and confirm passord with english letter, digits or underscore character, and their length must be less 20!”或者“用户名、电子邮箱、密码和密码确认都必须输入字母、数字、下划线，且长度应小于20！”；否则，继续判断电子邮箱格式是否正确（邮箱地址包含@字符），如果不正确，转回到userupdate.jsp，在表单下方显示提示信息“Incorrect email address!”或者“电子邮箱格式不正确！”；否则，继续判断密码与确认密码是否一致，如果不一致，转回到userupdate.jsp，在表单下方显示提示信息“The password and confirm passord are not same!”“两次输入的密码不一致！”。验证部分不作要求，也可用客户端JavaScript实现。
+
+6. 更新处理页面update_act.jsp，将userupdate.jsp表单中用户输入的信息赋予TestUser Bean对象中，以TestUser Bean对象为参数调用TestUserDao对象的第3个方法更新用户信息，更新成功，转到main.jsp，否则，转回到userupdate.jsp，在表单下方显示提示信息“Error occured in database operation! Please tyr again!”或者“数据库操作错误，请重试！”。
+
+网页名称是为叙述方便而预设的，与JavaBean类名一样，都可以自行定义，但JavaBean的包结构需按要求定义。网站发布时无需提交数据库文件。
+

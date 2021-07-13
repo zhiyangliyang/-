@@ -1,0 +1,17 @@
+3-2 数据库查询。
+MySQL数据库服务器为本地localhost；数据库名为：jsptest，编码为默认的单字节码（ISO 8859-1）；其中有一保存用户信息的数据表：jspuser，表结构与保存的用户信息见附图；MySQL用户可使用数据库的管理帐户root，密码为空；也可创建用户：jspuser1，密码：123456，并赋予相应的权限。MySQL JDBC驱动程序可从FTP下载。要求设计查询数据库，浏览用户信息的JSP网页，与其它题目的网页一起发布到与数据库服务器在同一台机器的tomcat服务器上。设计时可在本地建相应的数据库，用提供的SQL文件建立数据表进行调试；具体内容与要求如下：
+
+1. 实体JavaBean，文件名为：JspUser.java；包结构为“yzs（你姓名全拼的首字母）.test.jsp”；属性与数据表jspuser中的字段一致，用于保存输入的用户信息。
+
+2. 连接JavaBean，文件名为：DbConnection.java；包结构同上；实现与数据库连接的静态方法，方法名自定，返回Connection类型的对象。
+
+3. 数据访问JavaBean，文件名为：JspUserDao.java；包结构同上；实现三个方法，第1个方法，方法名自定，无参数。该方法调用DbConnection.java的静态方法建立与数据库的连接，然后查询数据库检索testuser表中的所有记录，每条记录的数据封装在一个TestUser Bean中，所有的TestUser Bean对象组成一个List对象，返回List对象。第2个方法，参数为用户ID，整数类型，从testuser表中查询指定ID的用户记录，将记录中的用户信息封装到TestUser Bean中，返回该TestUser Bean对象。第3个方法，参数为字符串，查询testuser数据表中用户名包含字符串参数的所有记录，每条记录的数据封装在一个TestUser Bean中，所有的TestUser Bean对象组成一个List对象，返回List对象。方法结束前需关闭数据库连接。
+
+4. 用户信息浏览页面，文件名为main.jsp。在页面中引入TestUserDao Bean，调用其第1个方法，获取保存所有用户信息的List对象，循环遍历List对象中所有的元素和每个元素（TestUser对象）中的所有属性，用表格显示出来，每条记录（TestUser中保存的用户信息）为一行，每个字段（TestUser Bean中的每个属性）为一列，每行的最后一列为“详细”链接，链接到detail.jsp页面，传递用户ID参数。用户信息列表下面为一表单，有一文本框和提交按钮，表单提交给search.jsp，模糊查询用户名包含文本框中用户输入内容的所有用户。
+
+5. 用户详细信息页面detail.jsp，获取main.jsp传递的用户ID参数，引入TestUserDao Bean，调用其第2个方法，获取id为参数值的记录，返回保存该用户信息的UserTest对象，用表格显示用户信息，每个字段为一行。
+
+6. 用户模糊查询页面search.jsp，获取main.jsp提交的用户在文本框中输入的参数，引入TestUserDao Bean，调用其第3个方法，查询用户名包含main.jsp提交的参数的所有用户，返回封装用户数据的List对象，循环遍历List对象中所有的元素和每个元素（TestUser对象）中的所有属性，用表格显示出来，每条记录（TestUser中保存的用户信息）为一行，每个字段（TestUser Bean中的每个属性）为一列。
+
+网页名称是为叙述方便而预设的，与JavaBean类名一样，都可以自行定义，但JavaBean的包结构需按要求定义。网站发布时无需提交数据库文件。
+
